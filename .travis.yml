@@ -17,6 +17,10 @@ script: ./travis-tool.sh run_tests
 on_failure:
   - ./travis-tool.sh dump_logs
 
+env:
+  global:
+    secure: "kK5UWXBMKs9GYLukBFMJwuE7Eujc+P5qHdieXhxOMvr2vSdEvuxIl6Y4xxlmpvTA6iWWhc9/k2FHfvIetOBwd/0LahYHerS+4qVgUEf8qYbACe/QL4B8QuLaQVMxkF35k9UJIKlj5LWzRcOhtB5qbj8S3A+A3Q5sBLVkvFSFrC0="
+
 notifications:
   email:
     on_success: change

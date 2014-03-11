@@ -6,15 +6,10 @@
 \usage{
 riff_dir(path, env = NULL, ...)
 
-riff_travis(package, ...)
+riff_travis()
 }
 \arguments{
   \item{path}{Directory of R files to execute}
-
-  \item{package}{Name of package. All files in
-  \code{tests/rifftron} will be executed, in the package
-  environment (so that non-exported functions can be
-  tested).}
 
   \item{env}{Environment in which to execute code. If
   \code{NULL}, defaults to a new environment inheriting
@@ -23,11 +18,13 @@ riff_travis(package, ...)
   \item{...}{Additional arguments passed on to \code{}}
 }
 \description{
-Run all R files in a directory or package and upload visual results.
+\code{riff_travis} runs code in the package environment, so that
+non-exported functions can be tested.
 }
 \examples{
 \donttest{
-riff_package("rifftron")
+riff_travis()
+riff_dir("tests/rifftron")
 }
 }
 

@@ -58,17 +58,17 @@ upload_dir <- function(set_name = sha1(), project = project_name(),
 
 #' Run all R files in a directory or package and upload visual results.
 #'
+#' \code{riff_travis} runs code in the package environment, so that
+#' non-exported functions can be tested.
+#'
 #' @param path Directory of R files to execute
-#' @param package Name of package. All files in \code{tests/rifftron} will
-#'   be executed, in the package environment (so that non-exported functions
-#'   can be tested).
 #' @param env Environment in which to execute code. If \code{NULL}, defaults
 #'   to a new environment inheriting from the global environment.
 #' @param ... Additional arguments passed on to \code{}
 #' @export
 #' @examples
 #' \donttest{
-#' riff()
+#' riff_travis()
 #' riff_dir("tests/rifftron")
 #' }
 riff_dir <- function(path, env = NULL, ...) {
@@ -97,13 +97,17 @@ riff_dir <- function(path, env = NULL, ...) {
 
 #' @rdname riff_dir
 #' @export
-riff_travis <- function(package, ...) {
-  if (!on_travis()) return(TRUE)
+riff_travis <- function() {
+  if (!on_travis()) {
+    message("Not on travis. Skipping")
+    return(TRUE)
+  }
 
+  package <- project_name()
   require(package, character.only = TRUE)
   env <- new.env(parent = asNamespace(package))
 
-  riff_dir("rifftron", env, set_name = travis_sha(), ...)
+  riff_dir("difftron", env, project_name = package, set_name = travis_sha())
 }
 
 travis_sha <- function() {
