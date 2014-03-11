@@ -3,13 +3,19 @@
 \alias{capture_plot}
 \title{Run some code, capturing an image.}
 \usage{
-capture_plot(code, path, dev = "png", width = 250, height = 250, ...)
+capture_plot(name, code, path = get_diff_dir(), dev = "png", width = 250,
+  height = 250, ...)
 }
 \arguments{
-  \item{code}{to evaluate and print. Printing ensure that
-  it works easily with ggplot2 and lattice graphics.}
+  \item{name}{unique name for plot. Should not include
+  extension}
 
-  \item{path}{where to save resulting image}
+  \item{code}{to evaluate and print. Printing ensure that
+  \code{capture_plot} works well with ggplot2 and lattice
+  graphics.}
+
+  \item{path}{where to save resulting image, defaults to
+  \code{\link{get_diff_dir}}.}
 
   \item{dev}{name of graphics device to use, defaults to
   \code{\link{png}}.}
@@ -27,6 +33,7 @@ capture_plot(code, path, dev = "png", width = 250, height = 250, ...)
 Run some code, capturing an image.
 }
 \examples{
-capture_plot(plot(1:10), tempfile(fileext = ".png"))
+capture_plot("Sequence", plot(1:10))
+capture_plot("Random", plot(runif(10)))
 }
 

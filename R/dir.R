@@ -22,7 +22,7 @@ set_diff_dir <- function(path, create = FALSE) {
   rifftron_env$diff_dir <- path
   invisible(old)
 }
-set_diff_dir(tempdir(), create = TRUE)
+set_diff_dir(tempfile(), create = TRUE)
 
 #' @export
 #' @rdname set_diff_dir
