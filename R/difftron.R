@@ -29,6 +29,7 @@ difftron_auth <- function(key = api_key()) {
 #' @param path character vector of images to upload
 #' @param key difftron api key, see \code{\link{api_key}} for more details
 #' @keywords internal
+#' @export
 #' @examples
 #' \donttest{
 #' png("test.png"); plot(runif(10)); dev.off()
