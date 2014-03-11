@@ -92,14 +92,18 @@ riff_dir <- function(path, env = NULL, ...) {
 
 #' @rdname riff_dir
 #' @export
-riff_package <- function(package, ...) {
-
-  path <- system.file("tests", "rifftron", package = package)
-  if (path == "") {
-    stop("No rifftron files found in ", package, call. = FALSE)
+riff_travis <- function(package, ...) {
+  if (!on_travis()) return(TRUE)
+  if (!file_test('-d', "rifftron")) {
+    stop("No rifftron files found for ", package, call. = FALSE)
   }
 
-  env <- asNamespace(package)
+  require(package, character.only = TRUE)
+  env <- new.env(parent = asNamespace(package))
 
-  riff_dir(path, env, ...)
+  riff_dir("rifftron", env, set_name = travis_sha(), ...)
+}
+
+travis_sha <- function() {
+  substr(Sys.getenv("TRAVIS_COMMIT"), 1, 10)
 }
