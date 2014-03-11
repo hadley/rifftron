@@ -19,25 +19,34 @@ easy to detect changes in visual output.
     If you want to use different keys for different projects/packages
     you can put it an `.Renviron` in the project directory.
 
+## Running locally
+
+Your visual tests should go in `tests/rifftron`. You can arrange your files
+however you like, but they will be sourced in alphabetical order, and you
+should use `capture_plot()` to name and capture graphics that you want to
+compare over time.  Use `test_dir("tests/rifftron")` to run locally and
+upload to difftron.
+
 ## Travis
 
-rifftron is fundamentally designed to be run from a continuous integration
-system like travis. It provides tools to help you test locally, but I
-expect the majority of visual tests will be triggered automatically by
-travis.  To this end, you should add a `tests/difftron.R` to your package
-containing:
+rifftron is designed to be run from a continuous integration system like
+travis. To get this set up, first create `tests/difftron.R`:
 
 ```R
 library(rifftron)
 riff_travis()
 ```
 
-You'll also need to securely add your difftron key to your travis script by
-running `travis encrypt`, then typing `DIFFTRON_API="your-key"` and copying the
+Next, securely add your difftron key to your travis script by running
+`travis encrypt`, then typing `DIFFTRON_API="your-key"` and copying the
 results into `.travis.yml`, like:
 
 ```
 env:
   global:
-    secure: "output from travis encrpyt...
+    secure: "output from travis encrpyt..."
 ```
+
+Now every time that travis runs R CMD check, it will upload your test
+graphics to a new imageset labelled with the first 10 characters of the
+git sha hash.
