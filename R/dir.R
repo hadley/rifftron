@@ -103,7 +103,7 @@ riff_travis <- function() {
     return(TRUE)
   }
 
-  package <- project_name("..")
+  package <- gsub("\\.Rcheck$", "", project_name(".."))
   require(package, character.only = TRUE)
   env <- new.env(parent = asNamespace(package))
 
