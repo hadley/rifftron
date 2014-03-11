@@ -45,8 +45,8 @@ git_path <- function() {
 
 #' Determine sha1 of the current git checkout
 #'
-#' A \code{*} suffix is added if the repo currently has uncommited changes
-#' that are not reflected in the SHA.
+#' A \code{-uncommited} suffix is added if the repo currently has uncommited
+#' changes that are not reflected in the SHA.
 #'
 #' @param n Number of characters to truncate sha1 to. Defaults to 10
 #'   because that's what github does.
@@ -55,7 +55,7 @@ sha1 <- function(n = 10) {
   sha <- git("rev-parse", paste0("--short=", n), "HEAD")
   if (!uncommitted()) return(sha)
 
-  paste0(sha, "*")
+  paste0(sha, "-uncommited")
 }
 
 uncommitted <- function() {

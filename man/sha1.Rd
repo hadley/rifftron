@@ -10,7 +10,7 @@ sha1(n = 10)
   Defaults to 10 because that's what github does.}
 }
 \description{
-A \code{*} suffix is added if the repo currently has uncommited changes
-that are not reflected in the SHA.
+A \code{-uncommited} suffix is added if the repo currently has uncommited
+changes that are not reflected in the SHA.
 }
 
