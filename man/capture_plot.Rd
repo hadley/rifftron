@@ -33,7 +33,9 @@ capture_plot(name, code, path = get_diff_dir(), dev = "png", width = 250,
 Run some code, capturing an image.
 }
 \examples{
+\donttest{
 capture_plot("Sequence", plot(1:10))
 capture_plot("Random", plot(runif(10)))
+}
 }
 

@@ -11,8 +11,10 @@
 #' @return (invisibly) the path of the created file
 #' @export
 #' @examples
+#' \donttest{
 #' capture_plot("Sequence", plot(1:10))
 #' capture_plot("Random", plot(runif(10)))
+#' }
 capture_plot <- function(name, code, path = get_diff_dir(),
                          dev = "png", width = 250, height = 250, ...) {
   stopifnot(is.character(path), length(path) == 1)
