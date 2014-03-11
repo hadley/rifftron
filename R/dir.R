@@ -107,7 +107,7 @@ riff_travis <- function() {
   require(package, character.only = TRUE)
   env <- new.env(parent = asNamespace(package))
 
-  riff_dir("rifftron", env, project_name = package, set_name = travis_sha())
+  riff_dir("rifftron", env, project = package, set_name = travis_sha())
 }
 
 travis_sha <- function() {
