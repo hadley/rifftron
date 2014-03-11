@@ -27,6 +27,9 @@ should use `capture_plot()` to name and capture graphics that you want to
 compare over time.  Use `test_dir("tests/rifftron")` to run locally and
 upload to difftron.
 
+It will name the image set with "draft" if you have uncommited
+changes, or otherwise with the first 10 characters of the git sha.
+
 ## Travis
 
 rifftron is designed to be run from a continuous integration system like
