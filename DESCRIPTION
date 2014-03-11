@@ -3,6 +3,7 @@ Title: Easily test your graphics with difftron.
 Description:
 Version: 0.1
 Authors@R: 'Hadley Wickham <h.wickham@gmail.com> [aut,cre]'
-Depends: R (>= 3.0.2)
+Depends:
+    R (>= 3.0.2)
 License: GPL-3
 LazyData: true
