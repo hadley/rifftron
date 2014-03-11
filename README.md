@@ -1,5 +1,7 @@
 # rifftron
 
+[![Build Status](https://travis-ci.org/hadley/rifftron.png?branch=master)](https://travis-ci.org/hadley/rifftron)
+
 rifftron is an R wrapper for [difftron](http://difftron.com), which makes it
 easy to detect changes in visual output.
 
