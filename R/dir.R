@@ -18,11 +18,11 @@ set_diff_dir <- function(path, create = FALSE) {
     stopifnot(file.exists(path))
   }
 
+  # message("Changing diff path to ", path)
   old <- rifftron_env$diff_dir
   rifftron_env$diff_dir <- path
   invisible(old)
 }
-set_diff_dir(tempfile(), create = TRUE)
 
 #' @export
 #' @rdname set_diff_dir
@@ -68,7 +68,8 @@ upload_dir <- function(set_name = sha1(), project = project_name(),
 #' @export
 #' @examples
 #' \donttest{
-#' riff_package("rifftron")
+#' riff()
+#' riff_dir("tests/rifftron")
 #' }
 riff_dir <- function(path, env = NULL, ...) {
   # Save images in new path, and cleanup on exit
@@ -76,15 +77,19 @@ riff_dir <- function(path, env = NULL, ...) {
   on.exit(unlink(get_diff_dir(), recursive = TRUE), add = TRUE)
   on.exit(set_diff_dir(old), add = TRUE)
 
+  if (!file_test('-d', path)) {
+    stop("Directory ", path, " does not exist.", call. = FALSE)
+  }
+
   # Source all files in directory
   r_files <- dir(path, pattern = "\\.[Rr]$", full.names = TRUE)
   if (length(r_files) == 0) {
-    stop("No test files found", call. = FALSE)
+    stop("No R files found in ", path, call. = FALSE)
   }
   if (is.null(env)) {
-    new <- new.env(parent = globalenv())
+    env <- new.env(parent = globalenv())
   }
-  for (path in r_files) sys.source(path, envir = env)
+  for (path in r_files) sys.source(path, envir = env, chdir = TRUE)
 
   # Upload to difftron
   upload_dir(...)
@@ -94,9 +99,6 @@ riff_dir <- function(path, env = NULL, ...) {
 #' @export
 riff_travis <- function(package, ...) {
   if (!on_travis()) return(TRUE)
-  if (!file_test('-d', "rifftron")) {
-    stop("No rifftron files found for ", package, call. = FALSE)
-  }
 
   require(package, character.only = TRUE)
   env <- new.env(parent = asNamespace(package))

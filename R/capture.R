@@ -20,12 +20,12 @@ capture_plot <- function(name, code, path = get_diff_dir(),
   stopifnot(is.character(path), length(path) == 1)
   stopifnot(is.character(dev), length(dev) == 1)
 
-  dev_f <- match.fun(dev)
-  dev_f(filename = file.path(path, paste0(name, ".", dev)), width = width,
-    height = height, ...)
-  on.exit(dev.off())
+  filename <- file.path(path, paste0(name, ".", dev))
+  # message("Capturing to ", filename)
 
-  capture.output(print(code))
+  dev_f <- match.fun(dev)
+  dev_f(filename, width = width, height = height, ...)
+  tryCatch(capture.output(print(code)), finally = dev.off())
 
   invisible(path)
 }
