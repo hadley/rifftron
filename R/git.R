@@ -1,7 +1,6 @@
 git <- function(..., quiet = TRUE) {
   options <- paste(..., collapse = " ")
   cmd <- paste0(shQuote(git_path()), " ", options)
-  print(cmd)
 
   result <- suppressWarnings(
     system(cmd, intern = quiet, ignore.stderr = quiet)
@@ -41,5 +40,5 @@ git_path <- function() {
 
 
 sha1 <- function(n = 10) {
-  git("rev-parse", paste0("--short=", n), "HEAD", quiet = F)
+  git("rev-parse", paste0("--short=", n), "HEAD")
 }
