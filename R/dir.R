@@ -55,3 +55,51 @@ upload_dir <- function(set_name = sha1(), project = project_name(),
     set_name)
   put_imageset(project, set_name, images, key)
 }
+
+#' Run all R files in a directory or package and upload visual results.
+#'
+#' @param path Directory of R files to execute
+#' @param package Name of package. All files in \cpde{tests/rifftron} will
+#'   be executed, in the package environment (so that non-exported functions
+#'   can be tested).
+#' @param env Environment in which to execute code. If \code{NULL}, defaults
+#'   to a new environment inheriting from the global environment.
+#' @param ... Additional arguments passed on to \code{}
+#' @export
+#' @examples
+#' \dontest{
+#' riff_package("rifftron")
+#' }
+riff_dir <- function(path, env = NULL, ...) {
+  # Save images in new path, and cleanup on exit
+  old <- set_diff_dir(tempfile(), create = TRUE)
+  on.exit(unlink(get_diff_dir(), recursive = TRUE), add = TRUE)
+  on.exit(set_diff_dir(old), add = TRUE)
+
+  # Source all files in directory
+  r_files <- dir(path, pattern = "\\.[Rr]$", full.names = TRUE)
+  if (length(r_files) == 0) {
+    stop("No test files found", call. = FALSE)
+  }
+  if (is.null(env)) {
+    new <- new.env(parent = globalenv())
+  }
+  for (path in r_files) sys.source(path, envir = env)
+
+  # Upload to difftron
+  upload_dir(...)
+}
+
+#' @rdname riff_dir
+#' @export
+riff_package <- function(package, ...) {
+
+  path <- system.file("tests", "rifftron", package = package)
+  if (path == "") {
+    stop("No rifftron files found in ", package, call. = FALSE)
+  }
+
+  env <- asNamespace(package)
+
+  riff_dir(path, env, ...)
+}
