@@ -1,8 +1,8 @@
 "%||%" <- function(a, b) if (!is.null(a)) a else b
 
 
-project_name <- function() {
-  basename(normalizePath(getwd()))
+project_name <- function(base = ".") {
+  basename(normalizePath(base))
 }
 
 on_cran <- function() {
