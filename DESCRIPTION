@@ -8,7 +8,7 @@ Depends:
     R (>= 3.0.2)
 License: GPL-3
 Imports:
-    httr (>= 0.3.0),
+    httr (>= 0.3),
     RCurl
 LazyData: true
 Roxygen: list(wrap = FALSE)
