@@ -2,4 +2,6 @@
 
 export(api_key)
 export(capture_plot)
+export(get_diff_dir)
 export(put_imageset)
+export(set_diff_dir)
