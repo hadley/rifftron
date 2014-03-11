@@ -1,10 +1,14 @@
 Package: rifftron
 Title: Easily test your graphics with difftron.
-Description: 
+Description: rifftron provides tools to make it easy to test graphics,
+    using https://difftron.com/ to provide nice visual diffs over time.
 Version: 0.1
 Authors@R: 'Hadley Wickham <h.wickham@gmail.com> [aut,cre]'
 Depends:
     R (>= 3.0.2)
 License: GPL-3
-Import: httr (>= 0.3.0), RCurl
+Imports:
+    httr (>= 0.3.0),
+    RCurl
 LazyData: true
+Roxygen: list(wrap = FALSE)
