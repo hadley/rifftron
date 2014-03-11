@@ -12,7 +12,7 @@ riff_package(package, ...)
   \item{path}{Directory of R files to execute}
 
   \item{package}{Name of package. All files in
-  \cpde{tests/rifftron} will be executed, in the package
+  \code{tests/rifftron} will be executed, in the package
   environment (so that non-exported functions can be
   tested).}
 
@@ -26,7 +26,7 @@ riff_package(package, ...)
 Run all R files in a directory or package and upload visual results.
 }
 \examples{
-\dontest{
+\donttest{
 riff_package("rifftron")
 }
 }

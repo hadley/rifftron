@@ -35,7 +35,7 @@ get_diff_dir <- function() rifftron_env$diff_dir
 #' @param project Name of the project. Defaults to the name of the current
 #'   directory
 #' @param path Path where images are located. All files ending in \code{.png}
-#'   are uploaded. Defaults to \code{\link{get_diff_dir()}}
+#'   are uploaded. Defaults to \code{\link{get_diff_dir}()}.
 #' @param key difftron api get. See \code{\link{api_key}} for more details.
 #' @export
 #' @examples
@@ -59,7 +59,7 @@ upload_dir <- function(set_name = sha1(), project = project_name(),
 #' Run all R files in a directory or package and upload visual results.
 #'
 #' @param path Directory of R files to execute
-#' @param package Name of package. All files in \cpde{tests/rifftron} will
+#' @param package Name of package. All files in \code{tests/rifftron} will
 #'   be executed, in the package environment (so that non-exported functions
 #'   can be tested).
 #' @param env Environment in which to execute code. If \code{NULL}, defaults
@@ -67,7 +67,7 @@ upload_dir <- function(set_name = sha1(), project = project_name(),
 #' @param ... Additional arguments passed on to \code{}
 #' @export
 #' @examples
-#' \dontest{
+#' \donttest{
 #' riff_package("rifftron")
 #' }
 riff_dir <- function(path, env = NULL, ...) {

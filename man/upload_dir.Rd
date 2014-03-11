@@ -16,7 +16,7 @@ upload_dir(set_name = sha1(), project = project_name(),
 
   \item{path}{Path where images are located. All files
   ending in \code{.png} are uploaded. Defaults to
-  \code{\link{get_diff_dir()}}}
+  \code{\link{get_diff_dir}()}.}
 
   \item{key}{difftron api get. See \code{\link{api_key}}
   for more details.}
