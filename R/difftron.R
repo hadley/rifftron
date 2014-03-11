@@ -11,8 +11,37 @@ api_key <- function() {
   if (secret == "") {
     stop("Couldn't find key in environment variable DIFFTRON_KEY",
       call. = FALSE)
-  } else {
-    message("Using secret stored in environment variable DIFFTRON_KEY")
   }
   secret
+}
+
+difftron_url <- function(...) {
+  httr::modify_url("https://difftron.com/", ...)
+}
+
+difftron_auth <- function(key = api_key()) {
+  httr::authenticate(key, "", "basic")
+}
+
+#' PUT an imageset.
+#'
+#' @param project,set Name of project and image set
+#' @param path character vector of images to upload
+#' @param key difftron api key, see \code{\link{api_key}} for more details
+#' @keywords internal
+#' @examples
+#' \donttest{
+#' png("test.png"); plot(runif(10)); dev.off()
+#' put_imageset("test", "test2", "test.png")
+#' unlink("test.png")
+#' }
+put_imageset <- function(project, set, path, key = api_key()) {
+  url <- difftron_url(path = file.path(project, set))
+  files <- lapply(path, RCurl::fileUpload)
+  names(files) <- "image"
+
+  r <- httr::PUT(url, difftron_auth(key), body = files)
+  httr::stop_for_status(r)
+
+  invisible(TRUE)
 }
