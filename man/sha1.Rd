@@ -10,7 +10,6 @@ sha1(n = 10)
   Defaults to 10 because that's what github does.}
 }
 \description{
-A \code{-uncommited} suffix is added if the repo currently has uncommited
-changes that are not reflected in the SHA.
+If the repo is uncommited, "draft" is return instead of the SHA.
 }
 
