@@ -1,4 +1,8 @@
 git <- function(..., quiet = TRUE) {
+  if (!file.exists(".git")) {
+    stop("Not in git repo", call. = FALSE)
+  }
+
   options <- paste(..., collapse = " ")
   cmd <- paste0(shQuote(git_path()), " ", options)
 
@@ -39,6 +43,23 @@ git_path <- function() {
 }
 
 
+#' Determine sha1 of the current git checkout
+#'
+#' A \code{*} suffix is added if the repo currently has uncommited changes
+#' that are not reflected in the SHA.
+#'
+#' @param n Number of characters to truncate sha1 to. Defaults to 10
+#'   because that's what github does.
+#' @export
 sha1 <- function(n = 10) {
-  git("rev-parse", paste0("--short=", n), "HEAD")
+  sha <- git("rev-parse", paste0("--short=", n), "HEAD")
+  if (!uncommitted()) return(sha)
+
+  paste0(sha, "*")
 }
+
+uncommitted <- function() {
+  system("git diff-index --quiet --cached HEAD") == 1 ||
+    system("git diff-files --quiet") == 1
+}
+
