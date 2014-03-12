@@ -17,7 +17,7 @@ on_failure:
 
 env:
   global:
-    secure: "kK5UWXBMKs9GYLukBFMJwuE7Eujc+P5qHdieXhxOMvr2vSdEvuxIl6Y4xxlmpvTA6iWWhc9/k2FHfvIetOBwd/0LahYHerS+4qVgUEf8qYbACe/QL4B8QuLaQVMxkF35k9UJIKlj5LWzRcOhtB5qbj8S3A+A3Q5sBLVkvFSFrC0="
+    secure: "QJXP4rcczbXMg8BZnRzKCWmAZjh2T0xl/xPRz1sA6deYdJEGAvNrHRMpDW9EJ7Rzi24TDn4qz0tDpuYSC66ZJzr1kDQix8/7kkm3Pxyul13uFk84AqNOc8lWka9G8yxNytOe1C3DPBSrmQt2msuV4WnYXArs+AxoBF5EVgG9sWo="
 
 notifications:
   email:
